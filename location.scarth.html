@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         jQuery.getQueryStringArgs = function () {
+            //拿到问号以后的字符串
+            var qs = (window.location.search.length > 0 ? window.location.search.substring(1) : ''),
+            //items为 a=1 键=值 组成的数组
+                    items = qs.length ? qs.split('&') : [];
+            //用来存放参数的对象
+            var args = {},
+            //把声明都提出来
+                    item,
+                    key,
+                    value,
+                    len = items.length,
+                    i;
+            for (i = 0; i < len; i++) {
+                //在这里没有块级作用域
+                item = items[i].split('=');
+                //要对返回的url进行解码  方法是 decodeURIComponent 或 decodeURI
+                key = decodeURI(item[0]);
+                value = decodeURI(item[1]);
+                if (key.length) {
+                    args[key] = value;
+                }
+            }
+            return args;
+        }
+    </script>
+</body>
+</html>
